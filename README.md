@@ -137,6 +137,23 @@ Sass Mixins는 스타일 시트 전체에서 재사용 할 CSS 선언 그룹 을
 선언하기(@mixin)와 포함하기(@include) 입니다.  
 만들어서(선언), 사용(포함)
 
+### @CONTENT
+Mixin에 @content이 포함되어 있다면 해당 부분에 원하는 스타일를 추가 할 수 있다.
+```scss
+@mixin icon($url) {
+  &::after {
+    content: $url;
+    @content;
+  }
+}
+.icon2 {
+  // icon Mixin에 스타일 블록을 추가하여 사용
+  @include icon("/images/icon.png") {
+    position: absolute;
+  };
+}
+```
+
 ## 키워드 인수
 인수를 입력할 때 명시적으로 키워드(변수)를 입력하여 작성할 수 있습니다.   
 별도의 인수 입력 순서를 필요로 하지 않아 편리하게 작성할 수 있습니다.  
@@ -176,7 +193,8 @@ Sass Mixins는 스타일 시트 전체에서 재사용 할 CSS 선언 그룹 을
 .box3 { @include dash-line($color:red); }
 ```
 
-## 반복문 (for문)
+## 반복문 (for문 , each)
+### for문
 ```scss
 // through
 // 종료 만큼 반복
@@ -198,6 +216,69 @@ Sass Mixins는 스타일 시트 전체에서 재사용 할 CSS 선언 그룹 을
   }
 }
 ```
+### each문
+@each는 List와 Map 데이터를 반복할 때 사용합니다.
+```scss
+//List
+@each $변수 in 데이터 {
+  // 반복 내용
+}
+$fruits: (apple, orange, banana, mango);
+
+.fruits {
+  @each $fruit in $fruits {
+    li.#{$fruit} {
+      background: url("/images/#{$fruit}.png");
+    }
+  }
+}
+```
+CSS
+```css
+.fruits li.apple {
+  background: url("/images/apple.png");
+}
+.fruits li.orange {
+  background: url("/images/orange.png");
+}
+.fruits li.banana {
+  background: url("/images/banana.png");
+}
+.fruits li.mango {
+  background: url("/images/mango.png");
+}
+```
+```scss
+//Map 데이터를 반복할 경우 하나의 데이터에 두 개의 변수가 필요합니다.
+@each $key변수, $value변수 in 데이터 {
+  // 반복 내용
+}
+
+$fruits-data: (
+  apple: korea,
+  orange: china,
+  banana: japan
+);
+
+@each $fruit, $country in $fruits-data {
+  .box-#{$fruit} {
+    background: url("/images/#{$country}.png");
+  }
+}
+```
+CSS
+```css
+.box-apple {
+  background: url("/images/korea.png");
+}
+.box-orange {
+  background: url("/images/china.png");
+}
+.box-banana {
+  background: url("/images/japan.png");
+}
+```
+
 
 ## 함수(Functions)
 함수와 Mixins은 거의 유사하지만 `반환되는 내용이 다름`.
@@ -249,3 +330,15 @@ Mixin은 위에서 살펴본 대로 지정한 스타일(Style)을 반환하는 �
 ## 오버워치 캐릭터 선택 차 scss 리팩토링
 리팩토링 : 결과의 변경 없이 코드의 구조를 재조정함.  
 <a href="https://github.com/backSeungWook/Part6/blob/master/overwatch/main.scss/"> overwatch/main.scss </a>
+
+## 데이터 종류
+데이터 | 설명 | 예시 | 특이사항
+--|--|--|--
+Numbers |	숫자 |	`1, .82, 20px, 2em…` | 단위가 있거나 없음
+Strings |	문자 |	`bold, relative, "/images/a.png", "dotum"` | 따옴표가 있거나 없음
+Colors |	색상 표현 |	`red, blue, #FFFF00, rgba(255,0,0,.5)`
+Booleans |	논리 |	`true, false` 
+Nulls |	아무것도 없음 |	`null` | 속성값에 NULL 사용시<br> 컴파일 하지 않음
+Lists |	공백이나 ,로 구분된 값의 목록 |	`(apple, orange, banana), apple orange` | ()붙이거나 붙이지 않음
+Maps |	Lists와 유사하나 값이 Key: Value 형태 |	`(apple: a, orange: o, banana: b)` | ()를 꼭 붙여야 함
+
