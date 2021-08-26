@@ -247,5 +247,5 @@ Mixin은 위에서 살펴본 대로 지정한 스타일(Style)을 반환하는 �
 ```
 
 ## 오버워치 캐릭터 선택 차 scss 리팩토링
-리팩토링 : 결과의 변경 없이 코드의 구조를 재조정함.
-overwatch/main.scss
+리팩토링 : 결과의 변경 없이 코드의 구조를 재조정함.  
+<a href="https://github.com/backSeungWook/Part6/blob/master/overwatch/main.scss/"> overwatch/main.scss </a>
