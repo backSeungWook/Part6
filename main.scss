@@ -1,3 +1,5 @@
+//import 시 확장자 생략 가능 다중 import 가능 ,(쉼표)로 구분
+@import "./sub","./sub2";
 $color: royalblue;
 .container{
   h1 {

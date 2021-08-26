@@ -224,3 +224,28 @@ Mixin은 위에서 살펴본 대로 지정한 스타일(Style)을 반환하는 �
   }
 }
 ```
+
+## 색상 내장 함수
+- mix($color1, $color2) : 두 개의 색을 섞습니다.
+- lighten($color, $amount) : 더 밝은색을 만듭니다.
+- `darken`($color, $amount) : 더 어두운색을 만듭니다.
+- saturate($color, $amount) : 색상의 채도를 올립니다.
+- desaturate($color, $amount) : 색상의 채도를 낮춥니다.
+- grayscale($color) : 색상을 회색으로 변환합니다.
+- invert($color) : 색상을 반전시킵니다.
+- `rgba`($color, $alpha) : 색상의 투명도를 변경합니다.
+- opacify($color, $amount) / fade-in($color, $amount) : 색상을 더 불투명하게 만듭니다.
+- transparentize($color, $amount) / fade-out($color, $amount) : 색상을 더 투명하게 만듭니다.
+
+## 가져오기(Import)
+
+@import로 외부에서 가져온 Sass 파일은 모두 단일 CSS 출력 파일로 병합됩니다.  
+또한, 가져온 파일에 정의된 모든 변수 또는 Mixins 등을 주 파일에서 사용할 수 있습니다.
+```scss
+//import 시 확장자 생략 가능 다중 import 가능 ,(쉼표)로 구분
+@import "./sub","./sub2";
+```
+
+## 오버워치 캐릭터 선택 차 scss 리팩토링
+리팩토링 : 결과의 변경 없이 코드의 구조를 재조정함.
+overwatch/main.scss
